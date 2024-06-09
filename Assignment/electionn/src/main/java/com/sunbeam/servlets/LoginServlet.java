@@ -5,9 +5,11 @@ import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sunbeam.daos.UserDao;
 import com.sunbeam.daos.UserDaoImpl;
@@ -36,18 +38,30 @@ public class LoginServlet extends HttpServlet{
 			if(user != null && user.getPassword().equals(passwd)){
 				
 				//login successfull
+				Cookie c = new Cookie ("uname", user.getFirstName());
+				c.setMaxAge(3600);
+				resp.addCookie(c);
 				
-				System.out.println("Login Successful:" +user);
-				if(user.getRole().equals("voter")) {
+				HttpSession session = req.getSession();
+				session.setAttribute("curuser",user);
+				
+				//System.out.println("Login Successful: " + user);
+				if(user.getRole().equals("voter")) { // voter login
 					resp.sendRedirect("canlist");
 					
-//					RequestDispatcher rd = req.getRequestDispatcher("canlist");
-//					rd.forward(req, resp);
+					//RequestDispatcher rd = req.getRequestDispatcher("candlist");
+					//rd.forward(req, resp);
+					//String reUrl = resp.encodeRedirectURL("canlist");
+					
+					//resp.sendRedirect(reUrl);
 				}
-				else {
+				else { // admin login
+					//resp.sendRedirect("result");
+					//String reUrl = resp.encodeRedirectURL("result");
 					resp.sendRedirect("result");
+					
 				}
-			}
+			} 
 			else{
 				//login failed
 				resp.setContentType("text/html");
@@ -56,8 +70,10 @@ public class LoginServlet extends HttpServlet{
 				out.println("<head>");
 				out.println("<title>Login Failed</title>");
 				out.println("<body>");
+				out.println("<center>");
 				out.printf("Invalid email or password. <br/> <br/>");
 				out.println("<a href='index.html'>Login Again</a>");
+				out.println("</center>");
 				out.println("</body>");
 				out.println("</head>");
 				out.println("</html>");

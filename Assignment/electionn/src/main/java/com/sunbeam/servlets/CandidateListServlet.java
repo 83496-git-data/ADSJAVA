@@ -45,6 +45,7 @@ public class CandidateListServlet extends HttpServlet{
 		out.println("<head>");
 		out.println("<title>Candidates</title>");
 		out.println("<body>");
+		out.println("<center>");
 		out.println("<h3>Online Voting</h3>");
 		
 		String userName = "";
@@ -61,10 +62,12 @@ public class CandidateListServlet extends HttpServlet{
 		
 		out.println("<form method='post' action='vote'>");
 		for (Candidate c : list) {
-			out.printf("<input type='radio' name='candidate' value='%d'/> %s (%s) <br/> \n",
-							c.getId(), c.getName(), c.getParty());
+			// <input type='radio' name='candidate' value='submit-value'/> display-label
+			out.printf("<input type='radio' name='candidate' value='%d'/> %s (%s) <br/>\n", 
+					c.getId(), c.getName(), c.getParty());
 		}
-		out.println("<input type='submit' value='vote'/>");
+		out.println("<input type='submit' value='Vote'/>");
+		out.println("</center>");
 		out.println("</body>");
 		out.println("</head>");
 		out.println("</html>");
