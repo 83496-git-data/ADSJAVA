@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Announcement</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    h3 {
+        color: #333;
+    }
+    form {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+        resize: vertical;
+    }
+    input[type="submit"] {
+        background: #5cb85c;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    input[type="submit"]:hover {
+        background: #4cae4c;
+    }
+</style>
+</head>
+<body>
+    <form method="post" action="announce">
+        <label for="ann">Announcement:</label><br/>
+        <textarea id="ann" name="ann" rows="6" cols="80"></textarea>
+        <br/><br/>
+        <input type="submit" value="Announce"/>
+    </form>
+</body>
+</html>
